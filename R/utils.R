@@ -29,21 +29,42 @@ reverse_split = function(lst) {
 }
 
 
-#' Converts a dataframe to a matrix where a column of the dataframe
-#' becomes the rownames of the matrix
+#' Converts a dataframe to a matrix where a column of the dataframe becomes the
+#' rownames of the matrix
+#'
+#' This is mostly a convenience function for conveting dataframes for clustering
+#' like functions, or anything that needs a matrix.
 #'
 #' @param x data frame
-#' @param nm_col int: which column should be removed and used as row names?
+#' @param var scalar tidyeval var: column to select. Should not contain a
+#'   negative (drop column).
 #'
 #' @return matrix
 #' @export
 #' @keywords internal
-dat_to_mat <- function(x, nm_col = 1) {
+dat_to_mat <- function(x, var = 1) {
     stopifnot(is.data.frame(x))
-    stopifnot(is_scalar_wholenumber(nm_col))
 
-    mat <- as.matrix(x[, -nm_col])
-    rownames(mat) <- x[[nm_col]]
+    var <- rlang::enquo(var)
+    stopifnot(!grepl('\\-', rlang::quo_name(var)))
+
+    # Extra handling because dropping a column passed as a string is a bitch
+    var_expr <- rlang::quo_expr(var)
+    if (rlang::type_of(var_expr) == 'string') {
+        var_expr <- as.name(var_expr)
+    }
+    not_var <- rlang::lang('-', var_expr)
+
+    nm <-
+        x %>%
+        dplyr::pull(!!var)
+
+    mat <-
+        x %>%
+        dplyr::select(!!not_var) %>%
+        as.matrix()
+
+    rownames(mat) <- nm
 
     return(mat)
 }

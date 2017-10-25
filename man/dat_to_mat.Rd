@@ -2,21 +2,22 @@
 % Please edit documentation in R/utils.R
 \name{dat_to_mat}
 \alias{dat_to_mat}
-\title{Converts a dataframe to a matrix where a column of the dataframe
-becomes the rownames of the matrix}
+\title{Converts a dataframe to a matrix where a column of the dataframe becomes the
+rownames of the matrix}
 \usage{
-dat_to_mat(x, nm_col = 1)
+dat_to_mat(x, var = 1)
 }
 \arguments{
 \item{x}{data frame}
 
-\item{nm_col}{int: which column should be removed and used as row names?}
+\item{var}{scalar tidyeval var: column to select. Should not contain a
+negative (drop column).}
 }
 \value{
 matrix
 }
 \description{
-Converts a dataframe to a matrix where a column of the dataframe
-becomes the rownames of the matrix
+This is mostly a convenience function for conveting dataframes for clustering
+like functions, or anything that needs a matrix.
 }
 \keyword{internal}
