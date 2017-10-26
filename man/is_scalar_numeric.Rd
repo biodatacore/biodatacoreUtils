@@ -16,5 +16,7 @@ scalar logical
 Check if object is scalar (length 1) numeric
 }
 \seealso{
-Other predicates: \code{\link{is_wholenumber}}
+Other predicates: \code{\link{is_binary_valued}},
+  \code{\link{is_numeric_like}},
+  \code{\link{is_wholenumber}}
 }

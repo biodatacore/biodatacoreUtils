@@ -87,3 +87,37 @@ neg_log <- function(x, base = exp(1)) {
 neg_log_10 <- function(x) {
     -1*log10(x)
 }
+
+
+#' as.character.formula
+#'
+#' Converts a formula to character representaion.
+#'
+#' @aliases as.character as.character.formula
+#'
+#' @param x formula object
+#' @param ... arguments passed to and from other methods.
+#'
+#' @return A character vector
+#' @export
+as.character.formula <- function(x, ...) {
+    fo <- paste(deparse(x), collapse = " ")
+    fo <- gsub("\\s+", " ", fo, perl = FALSE) # remove multiple spaces
+    return(fo)
+}
+
+
+#' Not In
+#'
+#' @param x vector or NULL. Values to be matched.
+#' @param table vector or NULL. Values to be matched against.
+#'
+#' @return logical vector of same length as x, indicating if a match was located
+#'   for each element of x
+#' @export
+#'
+`%nin%` <- function(x, table) {
+    match(x, table, nomatch = 0L) == 0L
+}
+
+

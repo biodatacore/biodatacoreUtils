@@ -21,5 +21,7 @@ scalar logical
 Checks if an object is/contains only whole numbers
 }
 \seealso{
-Other predicates: \code{\link{is_scalar_numeric}}
+Other predicates: \code{\link{is_binary_valued}},
+  \code{\link{is_numeric_like}},
+  \code{\link{is_scalar_numeric}}
 }
