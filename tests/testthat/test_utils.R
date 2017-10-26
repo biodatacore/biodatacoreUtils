@@ -1,5 +1,9 @@
 context('utils')
 
+
+# reverse_split -----------------------------------------------------------
+
+
 test_that('reverse_split works', {
 
     nums <- as.character(1:26)
@@ -53,4 +57,35 @@ test_that('dat_to_mat preserves data', {
 test_that('dat_to_mat works with all tidyeval forms', {
     expect_equal(dat_to_mat(dat, name), dat_to_mat(dat, 'name'))
     expect_equal(dat_to_mat(dat, name), dat_to_mat(dat, 11))
+})
+
+
+# %nin% -------------------------------------------------------------------
+
+test_that('%nin% works correctly', {
+    expect_true(1 %nin% letters)
+    expect_true('a' %nin% LETTERS)
+    expect_true('A' %nin% letters)
+
+    expect_false(1 %nin% 1:10)
+    expect_false('a' %nin% letters)
+    expect_false('A' %nin% LETTERS)
+
+    expect_equivalent(c(1, 2) %nin% 1:3, c(FALSE, FALSE))
+    expect_equivalent(c(4:5) %nin% 1:3, c(TRUE, TRUE))
+})
+
+
+
+# as.character.formula ----------------------------------------------------
+
+test_that('as.character.formula works correctly', {
+
+    expect_equivalent(as.character(a ~ b + c + .), 'a ~ b + c + .')
+
+    # remove extra spaces
+    expect_equivalent(as.character(a  ~  b   + c    +   .), 'a ~ b + c + .')
+
+    # put in spaces?
+    expect_equivalent(as.character(a~b+c+.), 'a ~ b + c + .')
 })
