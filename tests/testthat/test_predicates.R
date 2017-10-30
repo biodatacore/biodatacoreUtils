@@ -52,6 +52,12 @@ test_that('is_wholenumber works with doubles', {
     expect_true(is_wholenumber(c(-1, 0, 1)))
 })
 
+test_that('is_wholenumber n param works with doubles', {
+    expect_true(is_wholenumber(1))
+    expect_true(is_wholenumber(1, n = 1))
+    expect_false(is_wholenumber(1, n = 2))
+})
+
 test_that('is_wholenumber works with sci notation', {
     expect_true(is_wholenumber(10e1))
 })
@@ -120,7 +126,7 @@ test_that('is_binary_valued works with ints', {
         is_binary_valued(c(1L, -2L, NA_integer_))
     )
     expect_false(
-        is_binary_valued(c(1L, -2L, NA_integer_), na.rm = FALSE)
+        is_binary_valued(c(1L, -2L, NA_integer_), na_rm = FALSE)
     )
 })
 
@@ -138,7 +144,7 @@ test_that('is_binary_valued works with floats', {
         is_binary_valued(c(1.1, -2.3, NA_real_))
     )
     expect_false(
-        is_binary_valued(c(1.5, -2.123, NA_real_), na.rm = FALSE)
+        is_binary_valued(c(1.5, -2.123, NA_real_), na_rm = FALSE)
     )
 })
 
@@ -156,7 +162,7 @@ test_that('is_binary_valued works with strings', {
         is_binary_valued(c('yo', 'dog', NA_character_))
     )
     expect_false(
-        is_binary_valued(c('3', 'hi', NA_character_), na.rm = FALSE)
+        is_binary_valued(c('3', 'hi', NA_character_), na_rm = FALSE)
     )
 })
 
@@ -174,7 +180,96 @@ test_that('is_binary_valued works with factors', {
         is_binary_valued(factor(c('hello', '?', NA_character_)))
     )
     expect_false(
-        is_binary_valued(factor(c('hi', '?', NA_character_)), na.rm = FALSE)
+        is_binary_valued(factor(c('hi', '?', NA_character_)), na_rm = FALSE)
     )
 })
 
+
+# is_positive_numeric -----------------------------------------------------
+
+test_that('is_positive_numeric works with positive ints and doubles', {
+    expect_true(is_positive_numeric(1.0))
+    expect_true(is_positive_numeric(1L))
+    expect_true(is_positive_numeric(10e0))
+    expect_true(is_positive_numeric(c(1L, 2L)))
+    expect_true(is_positive_numeric(c(1.0, 10e0)))
+})
+
+test_that('is_positive_numeric fails with non-positive ints and doubles', {
+    expect_false(is_positive_numeric(0))
+    expect_false(is_positive_numeric(-1L))
+    expect_false(is_positive_numeric(-10e0))
+    expect_false(is_positive_numeric(c(-1L, 2L)))
+    expect_false(is_positive_numeric(c(1.0, 0)))
+})
+
+test_that('is_positive_numeric works with NAs', {
+    expect_true(is_positive_numeric(rlang::na_int))
+    expect_true(is_positive_numeric(rlang::na_dbl))
+    expect_true(is_positive_numeric(c(rlang::na_int, rlang::na_dbl)))
+    expect_true(is_positive_numeric(c(1L, NA)))
+    expect_true(is_positive_numeric(c(10, NA)))
+    expect_false(is_positive_numeric(c(-1L, NA)))
+    expect_false(is_positive_numeric(c(-1.0, NA)))
+})
+
+test_that('is_positive_numeric fails with character', {
+    expect_false(is_positive_numeric('a'))
+    expect_false(is_positive_numeric(c('a', 'b')))
+})
+
+
+test_that('is_positive_numeric param n works', {
+    expect_false(is_positive_numeric(1, n = 2))
+    expect_true(is_positive_numeric(c(1), n = 1))
+})
+
+
+# is_non_negative_numeric -----------------------------------------------------
+
+test_that('is_non_negative_numeric works with non-negative ints and doubles', {
+    expect_true(is_non_negative_numeric(0))
+    expect_true(is_non_negative_numeric(0L))
+    expect_true(is_non_negative_numeric(1.0))
+    expect_true(is_non_negative_numeric(1L))
+    expect_true(is_non_negative_numeric(10e0))
+    expect_true(is_non_negative_numeric(c(1L, 2L)))
+    expect_true(is_non_negative_numeric(c(1.0, 10e0)))
+})
+
+test_that('is_non_negative_numeric fails with negative ints and doubles', {
+    expect_false(is_non_negative_numeric(-1L))
+    expect_false(is_non_negative_numeric(-10e0))
+    expect_false(is_non_negative_numeric(c(-1L, 2L)))
+})
+
+test_that('is_non_negative_numeric works with positive ints and doubles', {
+    expect_true(is_non_negative_numeric(1.0))
+    expect_true(is_non_negative_numeric(1L))
+    expect_true(is_non_negative_numeric(10e0))
+    expect_true(is_non_negative_numeric(c(1L, 2L)))
+    expect_true(is_non_negative_numeric(c(1.0, 10e0)))
+})
+
+test_that('is_non_negative_numeric works with NAs', {
+    expect_true(is_non_negative_numeric(rlang::na_int))
+    expect_true(is_non_negative_numeric(rlang::na_dbl))
+    expect_true(is_non_negative_numeric(c(rlang::na_int, rlang::na_dbl)))
+    expect_true(is_non_negative_numeric(c(1L, NA)))
+    expect_true(is_non_negative_numeric(c(10, NA)))
+    expect_true(is_non_negative_numeric(c(0L, NA)))
+    expect_true(is_non_negative_numeric(c(0, NA)))
+    expect_false(is_non_negative_numeric(c(-1L, NA)))
+    expect_false(is_non_negative_numeric(c(-1, NA)))
+})
+
+test_that('is_non_negative_numeric fails with character', {
+    expect_false(is_non_negative_numeric('a'))
+    expect_false(is_non_negative_numeric(c('a', 'b')))
+})
+
+
+test_that('is_non_negative_numeric param n works', {
+    expect_false(is_non_negative_numeric(0, n = 2))
+    expect_true(is_non_negative_numeric(0, n = 1))
+})

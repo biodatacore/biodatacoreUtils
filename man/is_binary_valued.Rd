@@ -4,12 +4,13 @@
 \alias{is_binary_valued}
 \title{is_binary_valued}
 \usage{
-is_binary_valued(x, na.rm = TRUE)
+is_binary_valued(x, na_rm = TRUE)
 }
 \arguments{
 \item{x}{object to be checked}
 
-\item{na.rm}{scalar logical : Whether or not to include NA in the unique calculation}
+\item{na_rm}{scalar logical : Whether or not to include NA as a value in the
+unique calculation}
 }
 \value{
 scalar logical
@@ -20,10 +21,12 @@ Checks if a vector has only two unique entries
 \examples{
 is_binary_valued(c(1, 2))
 is_binary_valued(c("1", "1", NA))
-is_binary_valued(c("1", "1", NA), na.rm = FALSE)
+is_binary_valued(c("1", "1", NA), na_rm = FALSE)
 }
 \seealso{
-Other predicates: \code{\link{is_numeric_like}},
+Other predicates: \code{\link{is_non_negative_numeric}},
+  \code{\link{is_numeric_like}},
+  \code{\link{is_positive_numeric}},
   \code{\link{is_scalar_numeric}},
   \code{\link{is_wholenumber}}
 }

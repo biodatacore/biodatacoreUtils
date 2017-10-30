@@ -5,14 +5,16 @@
 \alias{is_scalar_wholenumber}
 \title{Checks if an object is/contains only whole numbers}
 \usage{
-is_wholenumber(x, tol = .Machine$double.eps^0.5)
+is_wholenumber(x, tol = .Machine$double.eps^0.5, n = NULL)
 
 is_scalar_wholenumber(x, tol = .Machine$double.eps^0.5)
 }
 \arguments{
 \item{x}{object to be checked.}
 
-\item{tol}{tolerance within which a whole number will be declared}
+\item{tol}{scalar double: tolerance within which a whole number will be declared}
+
+\item{n}{scalar wholenumber: expected length of vector}
 }
 \value{
 scalar logical
@@ -22,6 +24,8 @@ Checks if an object is/contains only whole numbers
 }
 \seealso{
 Other predicates: \code{\link{is_binary_valued}},
+  \code{\link{is_non_negative_numeric}},
   \code{\link{is_numeric_like}},
+  \code{\link{is_positive_numeric}},
   \code{\link{is_scalar_numeric}}
 }

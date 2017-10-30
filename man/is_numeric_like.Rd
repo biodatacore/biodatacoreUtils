@@ -22,6 +22,8 @@ is_numeric_like(c("5", "1.23", "-3.14", "hello", "?"))
 }
 \seealso{
 Other predicates: \code{\link{is_binary_valued}},
+  \code{\link{is_non_negative_numeric}},
+  \code{\link{is_positive_numeric}},
   \code{\link{is_scalar_numeric}},
   \code{\link{is_wholenumber}}
 }

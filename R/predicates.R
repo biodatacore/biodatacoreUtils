@@ -20,14 +20,21 @@ is_scalar_numeric <- function(x) {
 #' @family predicates
 #'
 #' @param x object to be checked.
-#' @param tol tolerance within which a whole number will be declared
+#' @param tol scalar double: tolerance within which a whole number will be declared
+#' @param n scalar wholenumber: expected length of vector
 #'
 #' @return scalar logical
 #'
 #' @export
 #'
-is_wholenumber <- function(x, tol = .Machine$double.eps^0.5) {
-    is.numeric(x) && all(abs(x - round(x)) < tol)
+is_wholenumber <- function(x, tol = .Machine$double.eps^0.5, n = NULL) {
+    if (!is.numeric(x))
+        return(FALSE)
+    if (is.numeric(x) && !all(abs(x - round(x)) < tol))
+        return(FALSE)
+    if (!rlang::is_null(n) && length(x) != n)
+        return(FALSE)
+    return(TRUE)
 }
 
 #' @rdname is_wholenumber
@@ -61,7 +68,8 @@ is_numeric_like <- function(x, ...) {
 #' @family predicates
 #'
 #' @param x object to be checked
-#' @param na.rm scalar logical : Whether or not to include NA in the unique calculation
+#' @param na_rm scalar logical : Whether or not to include NA as a value in the
+#'   unique calculation
 #'
 #' @return scalar logical
 #' @export
@@ -69,15 +77,54 @@ is_numeric_like <- function(x, ...) {
 #' @examples
 #' is_binary_valued(c(1, 2))
 #' is_binary_valued(c("1", "1", NA))
-#' is_binary_valued(c("1", "1", NA), na.rm = FALSE)
-is_binary_valued <- function(x, na.rm = TRUE) {
-    f <- as.factor(x)
+#' is_binary_valued(c("1", "1", NA), na_rm = FALSE)
+is_binary_valued <- function(x, na_rm = TRUE) {
+    fact <- as.factor(x)
 
-    if (!na.rm) {
-        nval <- length(unique(f))
+    if (!na_rm) {
+        nval <- length(unique(fact))
     } else {
-        nval <- length(levels(f))
+        nval <- length(levels(fact))
     }
 
     return(nval == 2)
+}
+
+
+#' Checks if a vector is positive numeric
+#'
+#'
+#' @family predicates
+#'
+#' @param x object to be checked
+#' @param n scalar wholenumber: expected length of vector
+#' @return scalar logical
+#' @export
+is_positive_numeric <- function(x, n = NULL) {
+    if (!is.numeric(x))
+        return(FALSE)
+    if (is.numeric(x) && !all(x > 0, na.rm = TRUE))
+        return(FALSE)
+    if (!rlang::is_null(n) && length(x) != n)
+        return(FALSE)
+    return(TRUE)
+}
+
+#' Checks if a vector is non-negative numeric
+#'
+#'
+#' @family predicates
+#'
+#' @param x object to be checked
+#' @param n scalar wholenumber: expected length of vector
+#' @return scalar logical
+#' @export
+is_non_negative_numeric <- function(x, n = NULL) {
+    if (!is.numeric(x))
+        return(FALSE)
+    if (is.numeric(x) && !all(x >= 0, na.rm = TRUE))
+        return(FALSE)
+    if (!rlang::is_null(n) && length(x) != n)
+        return(FALSE)
+    return(TRUE)
 }
