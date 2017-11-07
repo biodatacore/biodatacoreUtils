@@ -88,17 +88,22 @@ neg_log_10 <- function(x) {
     -1*log10(x)
 }
 
-
-#' as.character.formula
+#' fo_to_char
 #'
 #' Converts a formula to character representaion.
 #'
-#' @aliases as.character as.character.formula
-#'
-#' @param x formula object
+#' @param x formula
 #' @param ... arguments passed to and from other methods.
 #'
 #' @return A character vector
+#' @export
+fo_to_char <- function(x, ...) {
+    stopifnot(rlang::is_formula(x))
+    as.character.formula(x, ...)
+}
+
+#' @rdname fo_to_char
+#' @aliases as.character as.character.formula
 #' @export
 as.character.formula <- function(x, ...) {
     fo <- paste(deparse(x), collapse = " ")
