@@ -92,6 +92,10 @@ neg_log_10 <- function(x) {
 #'
 #' Converts a formula to character representaion.
 #'
+#' `fo_to_char`` is a function provided for use to interface with
+#' `as.character.formula`. If 'biodatacoreUtils' is loaded, then `as.character`
+#' should automatically find the `.formula` method.
+#'
 #' @param x formula
 #' @param ... arguments passed to and from other methods.
 #'
