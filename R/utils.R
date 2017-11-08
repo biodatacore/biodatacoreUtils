@@ -88,33 +88,6 @@ neg_log_10 <- function(x) {
     -1*log10(x)
 }
 
-#' fo_to_char
-#'
-#' Converts a formula to character representaion.
-#'
-#' `fo_to_char`` is a function provided for use to interface with
-#' `as.character.formula`. If 'biodatacoreUtils' is loaded, then `as.character`
-#' should automatically find the `.formula` method.
-#'
-#' @param x formula
-#' @param ... arguments passed to and from other methods.
-#'
-#' @return A character vector
-#' @export
-fo_to_char <- function(x, ...) {
-    stopifnot(rlang::is_formula(x))
-    as.character.formula(x, ...)
-}
-
-#' @rdname fo_to_char
-#' @aliases as.character as.character.formula
-#' @export
-as.character.formula <- function(x, ...) {
-    fo <- paste(deparse(x), collapse = " ")
-    fo <- gsub("\\s+", " ", fo, perl = FALSE) # remove multiple spaces
-    return(fo)
-}
-
 
 #' Not In
 #'
@@ -129,4 +102,43 @@ as.character.formula <- function(x, ...) {
     match(x, table, nomatch = 0L) == 0L
 }
 
+
+
+#' ckd_epi
+#'
+#' Calculate eGFR using the CKD-EPI (Chronic Kidney Disease Epidemiology
+#' Collaboration) formula.
+#' \url{https://www.qxmd.com/calculate/calculator_251/egfr-using-ckd-epi}
+#'
+#' @param gender numeric vector : 1 = male, 0 = female
+#' @param age numeric vector : Age in years
+#' @param scr numeric vector : Serum creatinine in mg/dl
+#' @param black numeric vector : 1 = black, 0 = otherwise
+#'
+#' @return numeric vector : ckd_epi scores
+#' @export
+#'
+ckd_epi <- function(gender, age, scr, black) {
+    k <- ifelse(gender == 1, 0.9, 0.7)
+    a <- ifelse(gender == 1, -0.411, -0.329)
+    scr_min <- ifelse(scr / k <= 1, scr / k, 1) ^ a
+    scr_max <- ifelse(scr / k >= 1, scr / k, 1) ^ (-1.209)
+    gender_factor <- ifelse(gender == 1, 1, 1.018)
+    black_factor <- ifelse(black == 1, 1.159, 1)
+
+
+    gfr <-
+        ifelse(
+            is.na(gender) | is.na(age) | is.na(scr) | is.na(black),
+            NA,
+            141 *
+                scr_min *
+                scr_max *
+                0.993 ^ age *
+                gender_factor *
+                black_factor
+        )
+
+    return(gfr)
+}
 
