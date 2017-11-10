@@ -75,17 +75,3 @@ test_that('%nin% works correctly', {
     expect_equivalent(c(4:5) %nin% 1:3, c(TRUE, TRUE))
 })
 
-
-
-# as.character.formula ----------------------------------------------------
-
-test_that('as.character.formula works correctly', {
-
-    expect_equivalent(as.character(a ~ b + c + .), 'a ~ b + c + .')
-
-    # remove extra spaces
-    expect_equivalent(as.character(a  ~  b   + c    +   .), 'a ~ b + c + .')
-
-    # put in spaces?
-    expect_equivalent(as.character(a~b+c+.), 'a ~ b + c + .')
-})
