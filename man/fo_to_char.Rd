@@ -24,5 +24,6 @@ Converts a formula to character representaion.
 \details{
 `fo_to_char`` is a function provided for use to interface with
 `as.character.formula`. If 'biodatacoreUtils' is loaded, then `as.character`
-should automatically find the `.formula` method.
+should automatically find the `.formula` method. `deparse_to_str` is the
+underlying function that does the conversion.
 }
