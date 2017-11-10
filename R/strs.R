@@ -1,13 +1,15 @@
-#' Deparse an object to a string
+#' Expression Deparsing
 #'
-#' Mostly used for pulling language and call objects to strings.
+#' Turn unevaluated expressions into character strings. With additional
+#' operations to make it a little neater.
 #'
-#' @param x object
+#' @param expr any R expression
+#' @param ... arguments passed to \code{\link{deparse}}
 #'
 #' @return scalar? character
 #' @export
-deparse_to_str <- function(x) {
-    x <- paste(deparse(x), collapse = " ")
+deparse2 <- function(expr, ...) {
+    x <- paste(deparse(expr, ...), collapse = " ")
     x <- gsub("\\s+", " ", x, perl = FALSE) # remove multiple spaces
     return(x)
 }

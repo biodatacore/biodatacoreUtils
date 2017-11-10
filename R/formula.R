@@ -21,5 +21,5 @@ fo_to_char <- function(x, ...) {
 #' @aliases as.character as.character.formula
 #' @export
 as.character.formula <- function(x, ...) {
-    deparse_to_str(x)
+    deparse2(x)
 }
