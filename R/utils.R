@@ -142,3 +142,16 @@ ckd_epi <- function(gender, age, scr, black) {
     return(gfr)
 }
 
+
+#' strip rownames
+#'
+#' @param x data frame
+#'
+#' @return data frame
+#' @export
+unrowname <- function(x) {
+    rownames(x) <- NULL
+    x
+}
+
+
