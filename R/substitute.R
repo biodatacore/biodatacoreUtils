@@ -1,6 +1,5 @@
 
-# Substitute --------------------------------------------------------------
-
+# Environment -------------------------------------------------------------
 
 to_env <- function(x, quiet = FALSE) {
     if (is.environment(x)) {
@@ -19,6 +18,11 @@ to_env <- function(x, quiet = FALSE) {
         stop("Input can not be coerced to an environment", call. = FALSE)
     }
 }
+
+
+
+# Substitute --------------------------------------------------------------
+
 
 
 #' A version of substitute that evaluates its first argument.
