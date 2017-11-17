@@ -49,5 +49,54 @@ substitute_q <- function(x, env) {
     eval(call)
 }
 
+# TODO write tests
+#' Crosses a list of quoted calls with a list of environments, performing quoted
+#' substitution each time.
+#'
+#' Useful for generating lists of model formulas. `f_cross_sub` is a version
+#' that enforces formulas.
+#'
+#'
+#' @param exprs a list of quoted calls
+#' @param fos a list of formulas
+#' @param envs a list of environments, or things that behaves like an
+#'   environment (like a list or data frame), or references to an environment
+#'   (like a positive integer or name, see \code{\link{as.environment}} for more
+#'   details)
+#' @param trans a function to be applied to each value in an environment before
+#'   it is passed to `substitute_q`. A common vlaue is \code{as.name}, to
+#'   substitute in character values as names.
+#'
+#' @details f_cross_sub maps environments across created calls.
+#'
+#' @return a nested list of calls
+#' @export
+#'
+cross_sub <- function(exprs, envs, trans = identity) {
+    stopifnot(rlang::is_list(exprs) && rlang::is_list(envs))
+    stopifnot(rlang::is_function(trans))
 
+    purrr::map(exprs, function(expr) {
+        purrr::map(envs, function(env) {
+            substitute_q(expr, purrr::map(env, trans))
+        })
+    })
+}
 
+#' @rdname cross_sub
+#' @export
+f_cross_sub <- function(fos, envs, trans = identity) {
+    stopifnot(rlang::is_list(fos))
+    purrr::walk(fos, ~stopifnot(rlang::is_formula(.)))
+
+    fo_envs <- purrr::map(fos, rlang::f_env)
+
+    call_list <- cross_sub(fos, envs, purrr::compose(trans))
+
+    purrr::map2(call_list, fo_envs, function(calls, env) {
+        purrr::map(calls, function(call) {
+            rlang::f_env(call) <- env
+            call
+        })
+    })
+}
