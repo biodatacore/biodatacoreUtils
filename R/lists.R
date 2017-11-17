@@ -7,9 +7,9 @@
 #' @return list
 #' @export
 #'
-lcombine <- function(x, method = c('stack', 'merge', 'cross')) {
-    stopifnot(rlang::is_named(x))
-    stopifnot(!anyDuplicated(names(x)))
+lst_combine <- function(x, method = c('stack', 'merge', 'cross')) {
+    # stopifnot(rlang::is_named(x))
+    # stopifnot(!anyDuplicated(names(x)))
     method <- match.arg(method)
 
     # split each name-values set into individual list elements
@@ -18,11 +18,19 @@ lcombine <- function(x, method = c('stack', 'merge', 'cross')) {
     } else if (method == 'merge') {
         purrr::pmap(x, list)
     } else {
-        x %>%
-            utils::stack() %>%
-            dplyr::mutate(ind = as.character(.data$ind)) %>%# strings as factor nonsense
-            as.list() %>%
-            purrr::pmap(~purrr::set_names(list(.x), .y))
+        # imap passes characters if named, and indices otherwise. Only want to
+        # inherit proper character names
+        purrr::imap(x, function(.x, nm) {
+            # as.list maps each element in a vector to a single element in a
+            # list
+            if (is.numeric(nm) || nchar(nm) == 0) {
+                as.list(.x)
+            } else {
+                rlang::set_names(as.list(.x), rep(nm, length(.x)))
+            }
+        }) %>%
+            purrr::reduce(c) %>%
+            purrr::lmap(list)
     }
 
 }
