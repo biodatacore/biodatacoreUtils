@@ -91,7 +91,7 @@ f_cross_sub <- function(fos, envs, trans = identity) {
 
     fo_envs <- purrr::map(fos, rlang::f_env)
 
-    call_list <- cross_sub(fos, envs, purrr::compose(trans))
+    call_list <- cross_sub(fos, envs, trans)
 
     purrr::map2(call_list, fo_envs, function(calls, env) {
         purrr::map(calls, function(call) {
