@@ -181,6 +181,7 @@ is_non_negative <- function(x, n = NULL, na_rm = FALSE) {
 }
 
 
+
 # zero --------------------------------------------------------------------
 
 
@@ -212,4 +213,36 @@ is_zero <- function(x, n = NULL, na_rm = FALSE) {
         return(NA)
     }
     all(are_zero(x), na.rm = na_rm)
+}
+
+
+
+# mzid --------------------------------------------------------------------
+
+#' Title
+#'
+#' @describeIn mzid
+#'
+#' @param x mzid object
+#'
+#' @return
+#' @export
+#'
+#' @examples
+is_mzid <- function(x) {
+    inherits(x, 'mzid')
+}
+
+#' Title
+#'
+#' @describeIn mzid
+#'
+#' @param x mzid object
+#'
+#' @return
+#' @export
+#'
+#' @examples
+is_mzids <- function(x) {
+    inherits(validate_mzids(x), 'mzids')
 }
