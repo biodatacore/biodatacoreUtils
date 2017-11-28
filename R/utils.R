@@ -171,5 +171,18 @@ deparse2 <- function(expr, ...) {
     return(x)
 }
 
+#' Truncates a number to d decimal points
+#'
+#' @param x vector numeric
+#' @param d scalar integerish
+#'
+#' @return vector numeric
+#' @export
+#'
+trunc2 = function(x, d = 0) {
+    stopifnot(is.numeric(x))
+    stopifnot(rlang::is_scalar_integerish(d))
 
+    trunc(x * 10 ^ d) / 10 ^ d
+}
 
