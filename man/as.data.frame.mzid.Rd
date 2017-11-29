@@ -7,6 +7,11 @@
 \usage{
 \method{as.data.frame}{mzid}(x, ...)
 }
+\arguments{
+\item{x}{mzid object}
+
+\item{...}{objects passed to \code{\link[dplyr]{as_data_frame}}}
+}
 \description{
 Prints an mzid object as a data frame
 }

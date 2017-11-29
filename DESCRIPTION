@@ -13,4 +13,6 @@ Imports: magrittr,
     rlang,
     naturalsort,
     purrr,
-    dplyr
+    dplyr,
+    glue,
+    forcats

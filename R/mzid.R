@@ -218,6 +218,9 @@ mzids <-
 
 #' Prints an mzid object as a data frame
 #'
+#' @param x mzid object
+#' @param ... objects passed to \code{\link[dplyr]{as_data_frame}}
+#'
 #' @aliases as.data.frame as.data.frame.mzid
 #' @export
 #'
