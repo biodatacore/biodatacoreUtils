@@ -8,9 +8,14 @@ mzids(mz, rt, n_mz = 6, n_rt = 4, sep = "_", tag = "mzid",
   source = NA)
 }
 \arguments{
-\item{mz, rt}{vector numeric: The mz and rt. Scalar values are broadcast.}
+\item{mz}{vector numeric: The mz and rt. Scalar values are broadcast.}
 
-\item{n_mz, n_rt}{scalar integerish: The number of digits after the decimal
+\item{rt}{vector numeric: The mz and rt. Scalar values are broadcast.}
+
+\item{n_mz}{scalar integerish: The number of digits after the decimal
+point from the mz and the rt to be used in}
+
+\item{n_rt}{scalar integerish: The number of digits after the decimal
 point from the mz and the rt to be used in}
 
 \item{sep}{scalar character: character separator in mzid}

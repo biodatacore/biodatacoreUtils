@@ -2,14 +2,28 @@
 % Please edit documentation in R/mzid.R
 \name{new_mzid}
 \alias{new_mzid}
-\title{Title}
+\title{Creates new mzid object}
 \usage{
-new_mzid(mz, rt, n_mz, n_rt, sep, tag, source = NA)
+new_mzid(mz, rt, n_mz, n_rt, sep, tag, source)
+}
+\arguments{
+\item{mz, rt}{scalar numeric: The mz and rt.}
+
+\item{n_mz, n_rt}{scalar integerish: The number of digits after the decimal
+point from the mz and the rt to be used in}
+
+\item{sep}{scalar character: character separator in mzid}
+
+\item{tag}{scalar character: tag at start of mzid}
+
+\item{source}{scalar character: data source of the mzids. Pass `NA` to keep
+the field, but fill with `NA`, pass `NULL` to create an object without the
+fields.}
 }
 \value{
 mzid object
 }
 \description{
-Title
+Creates new mzid object
 }
 \keyword{internal}

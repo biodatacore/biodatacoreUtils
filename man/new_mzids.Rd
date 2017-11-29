@@ -7,14 +7,9 @@
 new_mzids(mz, rt, n_mz, n_rt, sep, tag, source = NA)
 }
 \arguments{
-\item{mz}{vector numeric: The mz and rt. Scalar values are broadcast.}
+\item{mz, rt}{vector numeric: The mz and rt. Scalar values are broadcast.}
 
-\item{rt}{vector numeric: The mz and rt. Scalar values are broadcast.}
-
-\item{n_mz}{scalar integerish: The number of digits after the decimal
-point from the mz and the rt to be used in}
-
-\item{n_rt}{scalar integerish: The number of digits after the decimal
+\item{n_mz, n_rt}{scalar integerish: The number of digits after the decimal
 point from the mz and the rt to be used in}
 
 \item{sep}{scalar character: character separator in mzid}
@@ -26,9 +21,8 @@ the field, but fill with `NA`, pass `NULL` to create an object without the
 fields. Scalar values are broadcast}
 }
 \value{
-mzid object
+mzids object
 }
 \description{
 Title
 }
-\keyword{internal}

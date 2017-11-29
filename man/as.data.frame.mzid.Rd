@@ -2,19 +2,11 @@
 % Please edit documentation in R/mzid.R
 \name{as.data.frame.mzid}
 \alias{as.data.frame.mzid}
-\alias{as.data,frame}
-\title{Title}
+\alias{as.data.frame}
+\title{Prints an mzid object as a data frame}
 \usage{
 \method{as.data.frame}{mzid}(x, ...)
 }
-\arguments{
-\item{x}{any \R object.}
-
-\item{...}{additional arguments to be passed to or from methods.}
-}
-\value{
-data frame
-}
 \description{
-Title
+Prints an mzid object as a data frame
 }
