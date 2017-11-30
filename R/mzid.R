@@ -244,6 +244,7 @@ as.data.frame.mzid <- function(x, ...) {
 #'
 is_mzid <- function(x) {
     validate_mzid(x)
+    TRUE
 }
 
 #' @rdname is_mzid
@@ -251,5 +252,6 @@ is_mzid <- function(x) {
 #'
 is_mzids <- function(x) {
     validate_mzids(x)
+    TRUE
 }
 
