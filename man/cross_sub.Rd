@@ -8,7 +8,7 @@ substitution each time.}
 \usage{
 cross_sub(exprs, envs, trans = identity)
 
-f_cross_sub(fos, envs, trans = identity)
+f_cross_sub(fos, envs, trans = str_fo_parse)
 }
 \arguments{
 \item{exprs}{a list of quoted calls}

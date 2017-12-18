@@ -85,7 +85,7 @@ cross_sub <- function(exprs, envs, trans = identity) {
 
 #' @rdname cross_sub
 #' @export
-f_cross_sub <- function(fos, envs, trans = identity) {
+f_cross_sub <- function(fos, envs, trans = str_fo_parse) {
     stopifnot(rlang::is_list(fos))
     purrr::walk(fos, ~stopifnot(rlang::is_formula(.)))
 
@@ -99,4 +99,13 @@ f_cross_sub <- function(fos, envs, trans = identity) {
             call
         })
     })
+}
+
+
+#' Parses character vectors for substitution
+#'
+#' @keywords internal
+#'
+str_fo_parse <- function(x) {
+    parse(text = paste(x, collapse = ' + '))[[1]]
 }
