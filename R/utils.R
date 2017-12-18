@@ -186,3 +186,32 @@ trunc2 = function(x, d = 0) {
     trunc(x * 10 ^ d) / 10 ^ d
 }
 
+
+
+#' Title
+#'
+#' @keywords internal
+#'
+#' @param x lits or atomic vector
+#' @param sel A character vector of names or a numeric vector of positions
+#'
+#' @return vector logical
+#'
+inv_which <- function(x, sel) {
+    if (is.character(sel)) {
+        names <- names(x)
+        if (is.null(names)) {
+            stop("character indexing requires a named object", call. = FALSE)
+        }
+        names %in% sel
+    } else if (is.numeric(sel)) {
+        if (any(sel < 0)) {
+            !seq_along(x) %in% abs(sel)
+        } else {
+            seq_along(x) %in% sel
+        }
+
+    } else {
+        stop("unrecognised index type", call. = FALSE)
+    }
+}
