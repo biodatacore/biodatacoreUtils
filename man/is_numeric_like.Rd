@@ -36,6 +36,7 @@ Other predicates: \code{\link{are_non_negative}},
   \code{\link{are_positive}},
   \code{\link{are_whole_number}}, \code{\link{are_zero}},
   \code{\link{is_binary_valued}},
+  \code{\link{is_not_null}},
   \code{\link{is_scalar_bare_numeric}},
   \code{\link{is_zero}}
 
@@ -43,6 +44,7 @@ Other predicates: \code{\link{are_non_negative}},
   \code{\link{are_positive}},
   \code{\link{are_whole_number}}, \code{\link{are_zero}},
   \code{\link{is_binary_valued}},
+  \code{\link{is_not_null}},
   \code{\link{is_scalar_bare_numeric}},
   \code{\link{is_zero}}
 }

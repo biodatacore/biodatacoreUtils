@@ -214,3 +214,15 @@ is_zero <- function(x, n = NULL, na_rm = FALSE) {
     }
     all(are_zero(x), na.rm = na_rm)
 }
+
+
+# NULL --------------------------------------------------------------------
+
+#' Checks if object is not null
+#'
+#' @template is_predicate
+#'
+#' @export
+is_not_null <- function(x) {
+    !rlang::is_null(x)
+}
