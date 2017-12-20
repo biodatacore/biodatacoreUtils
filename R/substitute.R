@@ -74,7 +74,7 @@ substitute_q <- function(x, env) {
 #'
 cross_sub <- function(exprs, envs, trans = identity) {
     stopifnot(rlang::is_list(exprs) && rlang::is_list(envs))
-    stopifnot(rlang::is_function(trans))
+    stopifnot(rlang::is_function(trans) | rlang::is_formula(trans))
 
     purrr::map(exprs, function(expr) {
         purrr::map(envs, function(env) {
