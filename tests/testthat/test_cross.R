@@ -5,13 +5,13 @@ context('cross')
 
 test_that('gives correct length', {
     lst <- list(a = 1:3, b = 4:6, d = 7:9)
-    expect_equal(length(cross_some(lst, 'a')), 3)
-    expect_equal(length(cross_some(lst, c('a', 'b'))), 9)
+    expect_equal(length(cross_at(lst, 'a')), 3)
+    expect_equal(length(cross_at(lst, c('a', 'b'))), 9)
 })
 
-test_that('preserves names' {
+test_that('preserves names', {
     lst <- list(a = 1:3, b = 4:6,  d = 7:9)
-    crossed <- cross_some(lst, c('a', 'b'))
+    crossed <- cross_at(lst, c('a', 'b'))
 
     all_have_all_names <-
         purrr::map_lgl(crossed, ~all(rlang::has_name(., c('a', 'b', 'd'))))
@@ -19,9 +19,9 @@ test_that('preserves names' {
     expect_true(all(all_have_all_names))
 })
 
-test_that('indexes with names and indices' {
+test_that('indexes with names and indices', {
     lst <- list(a = 1:3, b = 4:6,  d = 7:9)
-    crossed <- cross_some(lst, c('a', 'd'))
+    crossed <- cross_at(lst, c('a', 'd'))
 
-    expect_equivalent(cross_some(lst, c('a', 'd')), cross_some(lst, c(1, 3)))
+    expect_equivalent(cross_at(lst, c('a', 'd')), cross_at(lst, c(1, 3)))
 })
