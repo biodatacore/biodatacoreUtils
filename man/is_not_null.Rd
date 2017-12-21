@@ -8,30 +8,7 @@ is_not_null(x)
 }
 \arguments{
 \item{x}{object to be checked}
-
-\item{n}{scalar whole number: expected length of vector}
-
-\item{na_rm}{scalar logical: whether or not NAs should be considered in the
-calculation. If na_rm = FALSE, then any NA in the vector being checked will
-result in an NA output.}
-}
-\value{
-scalar logical
 }
 \description{
 Checks if object is not null
-}
-\section{Ignoring NAs}{
-NA
-}
-
-\seealso{
-Other predicates: \code{\link{are_non_negative}},
-  \code{\link{are_numeric_like}},
-  \code{\link{are_positive}},
-  \code{\link{are_whole_number}}, \code{\link{are_zero}},
-  \code{\link{has_zero_range}},
-  \code{\link{is_binary_valued}},
-  \code{\link{is_scalar_bare_numeric}},
-  \code{\link{is_zero}}
 }

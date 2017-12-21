@@ -39,7 +39,7 @@ is_scalar_bare_numeric <- function(x) {
 
 #' Checks if object is not null
 #'
-#' @template is_predicate
+#' @param x object to be checked
 #'
 #' @export
 is_not_null <- function(x) {
@@ -271,7 +271,7 @@ is_binary_valued <- function(x, n = NULL, na_rm = FALSE) {
 #' Determine if range of vector is FP 0.
 #'
 #' @template is_predicate
-#'
+#' @param tol scalar numeric: tolerance within which zero range will be declared
 #' @export
 has_zero_range <- function(x, tol = .Machine$double.eps ^ 0.5, n = NULL, na_rm = FALSE) {
 
