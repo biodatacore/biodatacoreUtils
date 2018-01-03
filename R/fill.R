@@ -96,6 +96,7 @@ fill_at <- function(.x, .at, .f, ...) {
 #' @seealso zero_to_na
 na_to_zero <- function(x) {
     x[rlang::are_na(x)] <- 0
+    x
 }
 
 #' Fills 0 with NAs
@@ -107,6 +108,7 @@ na_to_zero <- function(x) {
 #' @seealso na_to_zero
 zero_to_na <- function(x) {
     x[x == 0] <- NA
+    x
 }
 
 # ? modify for changing dataframe columns in an apply like way.
